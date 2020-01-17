@@ -1,0 +1,9 @@
+@font-face{
+  font-family:"TradeGothic Bold Condensed";
+  src:url("./fonts/trade-gothic.eot") format("eot"),
+  url("./fonts/trade-gothic.woff2") format("woff2"),
+  url("./fonts/trade-gothic.woff") format("woff"),
+  url("./fonts/trade-gothic.ttf") format("truetype");
+}     
+      
+      
