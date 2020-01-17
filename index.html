@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ryan Cwynar - Tech Stack</title>
+  <title>Ryan Cwynar - Tech Stack</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 	<style>
 		html, body {
 			padding: 0;
 			margin: 0;
 			box-sizing: border-box;
-			font-family: Helvetica, Calibri, Roboto, Open Sans, sans-serif
-			-webkit-backface-visibility: hidden;
+      font-family: 'Open Sans';
+      font-weight: normal;
 		}
     body{height: 100%;}
 		* {
@@ -66,15 +67,18 @@
       position: fixed;
       bottom: 0;
       padding: 3vw;
-      background-color: rgba(0,0,0,.4);
+      background-color: rgba(0,0,0,.8);
       width: 100%;
       min-height: 20vh;
+    }
+    #global-info-box h2{
+      color: #aaa;
     }
 	</style>
 </head>
 <body>
   <h1><span>Ryan's Tech Stack</span></h1>
-  <div id="global-info-box">
+  <div id="global-info-box" class="hidden">
     <h2></h2>
     <p></p>
 
@@ -86,6 +90,17 @@
   <script src="./data.js"></script>
 	
 	<script>
+    function showInfoBox(currentNode){
+      var info = document.getElementById('global-info-box')
+      info.getElementsByTagName('h2')[0].innerHTML = currentNode.name
+      info.getElementsByTagName('p')[0].innerHTML = currentNode.desc
+      info.classList.remove('hidden')
+    }
+    function hideInfoBox(){
+
+      var info = document.getElementById('global-info-box')
+      info.classList.add('hidden')
+    }
 		const svg = d3.select('svg');
 		let width = document.body.clientWidth; // get width in pixels
 		let height = +svg.attr('height');
@@ -330,11 +345,8 @@
 					// 	.classed('hidden', false);
 					$currentGroup.select('.node-icon')
             .classed('node-icon--faded', true);
-          console.log(currentNode)
-          var info = document.getElementById('global-info-box')
-          info.getElementsByTagName('h2')[0].innerHTML = currentNode.name
-          info.getElementsByTagName('p')[0].innerHTML = currentNode.desc
 
+          showInfoBox(currentNode) 
 				})
 				.on('interrupt', () => {
 					console.log('move interrupt', currentNode);
@@ -372,7 +384,8 @@
 
 				// hide all circle-overlay
 				d3.selectAll('.circle-overlay').classed('hidden', true);
-				d3.selectAll('.node-icon').classed('node-icon--faded', false);
+        d3.selectAll('.node-icon').classed('node-icon--faded', false);
+        hideInfoBox()
 			}
 		});
 
